@@ -20,10 +20,10 @@ stages:
       displayName: Provision Azure IaC
       pool:
         vmImage: 'ubuntu-18.04'
-      steps:
-      - task: xsscsCache@2
+       steps:
+      - task: DownloadSecureFile@1
         name: tfvardef
-        displayName: xsscsCache
+        displayName: Download terraform.tfvars
         inputs:
           secureFile: 'terraform.tfvars'
 
