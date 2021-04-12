@@ -16,7 +16,7 @@ stages:
   - stage: ProvisionIaC
     displayName: Azure Resources Provisioning
     jobs:
-    - job: ProvisionAzureIaC
+    - job: AzureIaC
       displayName: Provision Azure IaC
       pool:
         vmImage: 'ubuntu-18.04'
