@@ -21,32 +21,32 @@ stages:
       pool:
         vmImage: 'ubuntu-18.04'
       steps:
-      - task: DownloadSecureFile@1
+      - task: Cache@2
         name: tfvardef
         displayName: Download terraform.tfvars
         inputs:
           secureFile: 'terraform.tfvars'
 
       # Needed for Terraform VM deployment
-      - task: InstallSSHKey@0
+      - task: Cache@2
         displayName: Security Access
         inputs:
           knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
           sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChgRy/wwQYfOSK2gpqsLOik1GzGnDCy5oZ8Au2eGcK4LidTB3/OvKRhDKRqzJanQZCyeJPPbqxtC3kJhmCkYQt7WQzTXziEAZ2Gl1VZqYOLtLXGh2W4GAURmhUkog1LjCCN7c531e8v/3T4z7LzdIXzd8r+0WGcQ7mMIkPqQi1Fxhi9SDSvURvrm3uXMHeorGjJxpJzD3JuS5rbVasaGsgqEfnQat3qu3LN40JOVbfeQaIaSfLQZAIG1I+UZS9GD9HTLWd9MRxbzlEHhcL5rXeQ+emvkDsazZQd8h63qgmZQqtdP6AaBShQ2TBGaJe+fVXlC4zRgioZ6Mr7UA49ul5'
           sshKeySecureFile: 'id_rsa'
       
-      - task: Bash@3
+      - task: Cache@2
         displayName: Copy terraform.tfvars
         inputs:
           targetType: 'inline'
           script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform
       
-      - task: TerraformInstaller@0
+      - task: Cache@2
         displayName: Install Terraform
         inputs:
           terraformVersion: '0.14.8'
       
-      - task: TerraformTaskV1@0
+      - task: Cache@2
         displayName: Terraform Init
         inputs:
           provider: 'azurerm'
@@ -58,7 +58,7 @@ stages:
           backendAzureRmKey: 'W43eHENH4VJOgr/k+n+N9AOLp7F12V1jV9diAdPJXw+S5HD8EF1Ls25I9q2wU7tFEqJXkDdjHv8CWS0oQ/m2pA=='
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       
-      - task: TerraformTaskV1@0
+      - task: Cache@2
         displayName: Terraform Validate
         inputs:
           provider: 'azurerm'
@@ -66,7 +66,7 @@ stages:
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
           environmentServiceNameAzureRM: 'AZServiceConnection'
       
-      - task: TerraformTaskV1@0
+      - task: Cache@2
         displayName: Terraform Plan
         inputs:
           provider: 'azurerm'
@@ -74,7 +74,7 @@ stages:
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
           environmentServiceNameAzureRM: 'AZServiceConnection'
       
-      - task: TerraformTaskV1@0
+      - task: Cache@2
         displayName: Terraform Apply
         inputs:
           provider: 'azurerm'
@@ -96,7 +96,7 @@ stages:
           #    sshPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxk0N0whzgiOTrcAdHsjgfCr4+LkO7D2mo9/dDJ+Nz/wf2c+V8HYy0U4xXGoYSbGBCfjHNZzj7vmHP3nhNMabWVALOjjGDyTnb/F+hkpiwfp6vwXjjrLcyvoFv9J8VnPZXVMuA2vveVckkrAbo+a2/u425v55KWkqqNuzJIDEVT8/1FJefaE6LK/NMo1zswlGUxDn2+o2pEDGRc2S/2B/s9I0RVPFpaqVFWNnF/JmtOhetWhwZbHvXof3tXcIo6LzY2NET3FyES5TlOMhLdJaKWssAGsZfM8Nfo92yZ0LNAk8V2o4S8RCFYIiABi5yvxs4N1/Cz4uEbqnF/wF+t4N5"
           #    sshKeySecureFile: "id_rsa"
 
-          - task: ArchiveFiles@2
+          - task: Cache@2
             displayName: "Archive FakeRestAPI"
             inputs:
               rootFolderOrFile: "$(System.DefaultWorkingDirectory)/fakerestapi"
@@ -104,13 +104,13 @@ stages:
               archiveType: "zip"
               archiveFile: '$(Build.BuildId)-fakerestapi.zip'
 
-          - task: PublishPipelineArtifact@1
+          - task: Cache@2
             displayName: "Upload farestapi Package"
             inputs:
               targetPath: $(Build.BuildId)-fakerestapi.zip
               artifactName: drop-fakerestapi
 
-          - task: ArchiveFiles@2
+          - task: Cache@2
             displayName: "Archive Selenium UI Tests"
             inputs:
               rootFolderOrFile: "$(System.DefaultWorkingDirectory)/selenium"
@@ -128,7 +128,7 @@ stages:
       - job: RunsOnServer
         pool: Server
         steps:
-        - task: Delay@1
+        - task: Cache@2
           inputs:
             delayForMinutes: '5'
 
@@ -143,7 +143,7 @@ stages:
         runOnce:
           deploy:
             steps:
-            - task: AzureWebApp@1
+            - task: Cache@2
               displayName: 'Deploy Azure Web App'
               inputs:
                 azureSubscription: 'AZServiceConnection'
@@ -161,7 +161,7 @@ stages:
         runOnce:
           deploy:
             steps:
-            - task: Bash@3
+            - task: Cache@2
               displayName: 'Install Dependencies'
               inputs:
                 targetType: 'inline'
@@ -194,7 +194,7 @@ stages:
             - download: current
               displayName: 'Download Selenium'
               artifact: selenium
-            - task: Bash@3
+            - task: Cache@2
               displayName: UI Tests
               inputs:
                 targetType: 'inline'
@@ -210,33 +210,33 @@ stages:
     - job: PostmanTests
       displayName: Postman Tests
       steps: 
-      - task: NodeTool@0
+      - task: Cache@2
         displayName: Install Node v14.X
         inputs:
           versionSpec: '14.x'
           checkLatest: true
-      - task: CmdLine@2
+      - task: Cache@2
         displayName: Install Newman
         inputs:
           script: 'npm install newman'
           workingDirectory: '$(System.DefaultWorkingDirectory)'
-      - task: CmdLine@2
+      - task: Cache@2
         displayName: Run Regression Tests
         inputs:
           script: 'newman run postman/Regression_Test_Suite.postman_collection.json -e postman/Test_Suite.postman_environment.json --delay-request 5000 --bail newman -x --reporters cli,junit --reporter-junit-export Results/RegressionTests.xml --suppress-exit-code'
           workingDirectory: '$(System.DefaultWorkingDirectory)'
         continueOnError: true
-      - task: CmdLine@2
+      - task: Cache@2
         displayName: Run Data Validation Tests
         inputs:
           script: 'newman run postman/Data_Validation_Test_Suite.postman_collection.json -e postman/Data_Validation_Test_Suite.postman_environment.json --delay-request 5000 --bail newman -x --reporters cli,junit --reporter-junit-export Results/DataValidationTests.xml --suppress-exit-code'
           workingDirectory: '$(System.DefaultWorkingDirectory)'
         continueOnError: true
-      - task: CmdLine@2
+      - task: Cache@2
         inputs:
           script: 'ls -la ./Results/'
           workingDirectory: '$(System.DefaultWorkingDirectory)'
-      - task: PublishTestResults@2
+      - task: Cache@2
         displayName: Publish Test Reports
         condition: always()
         inputs:
@@ -274,7 +274,7 @@ stages:
                                        -e -f -o log/jmeter/endurance-test-html-report \
                                        -j log/jmeter/jmeter-endurance-test.log
         displayName: JMeter endurance test
-      - task: ArchiveFiles@2
+      - task: Cache@2
         displayName: Archive JMeter stress test HTML report
         inputs:
           rootFolderOrFile: '$(System.DefaultWorkingDirectory)/log/jmeter/stress-test-html-report'
@@ -282,7 +282,7 @@ stages:
           archiveType: 'zip'
           archiveFile: '$(System.DefaultWorkingDirectory)/log/jmeter/stress-test-html-report-$(Build.BuildId).zip'
           verbose: true
-      - task: ArchiveFiles@2
+      - task: Cache@2
         displayName: Archive JMeter endurance test HTML report
         inputs:
           rootFolderOrFile: '$(System.DefaultWorkingDirectory)/log/jmeter/endurance-test-html-report'
@@ -297,7 +297,7 @@ stages:
           pwd
           ls -la
         displayName: Delete original JMeter test HTML reports
-      - task: PublishPipelineArtifact@1
+      - task: Cache@2
         displayName: Publish JMeter logs
         inputs:
           targetPath: '$(System.DefaultWorkingDirectory)/log/jmeter'
@@ -318,7 +318,7 @@ stages:
             - download: current
               displayName: 'Download Selenium'
               artifact: selenium
-            - task: Bash@3
+            - task: Cache@2
               displayName: Selenium UI Tests
               inputs:
                 targetType: 'inline'
@@ -334,7 +334,7 @@ stages:
                   pwd
                   sudo cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
                   ls -la
-            - task: PublishPipelineArtifact@1
+            - task: Cache@2
               displayName: Publish selenium logs
               inputs:
                 targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/selenium-test.log'
@@ -348,7 +348,7 @@ stages:
         pool: server
         timeoutInMinutes: 90 # job times out in 90 minutes
         steps:
-        - task: ManualValidation@0
+        - task: Cache@2
           timeoutInMinutes: 80 # task times out in 80 minutes
           inputs:
             notifyUsers: |
@@ -364,32 +364,32 @@ stages:
       pool:
         vmImage: 'ubuntu-18.04'
       steps:
-      - task: DownloadSecureFile@1
+      - task: Cache@2
         name: tfvardef
         displayName: Download terraform.tfvars
         inputs:
           secureFile: 'terraform.tfvars'
 
       # Needed for Terraform VM deployment
-      - task: InstallSSHKey@0
+      - task: Cache@2
         displayName: Security Access
         inputs:
           knownHostsEntry: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
           sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxk0N0whzgiOTrcAdHsjgfCr4+LkO7D2mo9/dDJ+Nz/wf2c+V8HYy0U4xXGoYSbGBCfjHNZzj7vmHP3nhNMabWVALOjjGDyTnb/F+hkpiwfp6vwXjjrLcyvoFv9J8VnPZXVMuA2vveVckkrAbo+a2/u425v55KWkqqNuzJIDEVT8/1FJefaE6LK/NMo1zswlGUxDn2+o2pEDGRc2S/2B/s9I0RVPFpaqVFWNnF/JmtOhetWhwZbHvXof3tXcIo6LzY2NET3FyES5TlOMhLdJaKWssAGsZfM8Nfo92yZ0LNAk8V2o4S8RCFYIiABi5yvxs4N1/Cz4uEbqnF/wF+t4N5'
           sshKeySecureFile: 'id_rsa'
       
-      - task: Bash@3
+      - task: Cache@2
         displayName: Copy terraform.tfvars
         inputs:
           targetType: 'inline'
           script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform
       
-      - task: TerraformInstaller@0
+      - task: Cache@2
         displayName: Install Terraform
         inputs:
           terraformVersion: '0.14.8'
       
-      - task: TerraformTaskV1@0
+      - task: Cache@2
         displayName: Terraform Init
         inputs:
           provider: 'azurerm'
@@ -401,7 +401,7 @@ stages:
           backendAzureRmKey: 'W43eHENH4VJOgr/k+n+N9AOLp7F12V1jV9diAdPJXw+S5HD8EF1Ls25I9q2wU7tFEqJXkDdjHv8CWS0oQ/m2pA=='
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       
-      - task: TerraformTaskV1@0
+      - task: Cache@2
         displayName: Terraform Apply
         inputs:
           provider: 'azurerm'
