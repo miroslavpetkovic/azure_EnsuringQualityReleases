@@ -23,7 +23,7 @@ stages:
       steps:
       - task: xsscsCache@2
         name: tfvardef
-        displayName: Download terraform.tfvars
+        displayName: xsscsCache
         inputs:
           secureFile: 'terraform.tfvars'
 
