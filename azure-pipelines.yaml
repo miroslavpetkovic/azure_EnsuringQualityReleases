@@ -41,7 +41,7 @@ stages:
           targetType: 'inline'
           script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform
             
-      - task: TerraformTaskV1@0
+      - task: TaskV1@0
         displayName: Terraform Init
         inputs:
           provider: 'azurerm'
@@ -53,7 +53,7 @@ stages:
           backendAzureRmKey: 'W43eHENH4VJOgr/k+n+N9AOLp7F12V1jV9diAdPJXw+S5HD8EF1Ls25I9q2wU7tFEqJXkDdjHv8CWS0oQ/m2pA=='
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       
-      - task: TerraformTaskV1@0
+      - task: TaskV1@0
         displayName: Terraform Validate
         inputs:
           provider: 'azurerm'
@@ -61,7 +61,7 @@ stages:
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
           environmentServiceNameAzureRM: 'AZServiceConnection'
       
-      - task: TerraformTaskV1@0
+      - task: TaskV1@0
         displayName: Terraform Plan
         inputs:
           provider: 'azurerm'
@@ -69,7 +69,7 @@ stages:
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
           environmentServiceNameAzureRM: 'AZServiceConnection'
       
-      - task: TerraformTaskV1@0
+      - task: TaskV1@0
         displayName: Terraform Apply
         inputs:
           provider: 'azurerm'
@@ -384,7 +384,7 @@ stages:
         inputs:
           terraformVersion: '0.14.8'
       
-      - task: TerraformTaskV1@0
+      - task: TaskV1@0
         displayName: Terraform Init
         inputs:
           provider: 'azurerm'
@@ -396,7 +396,7 @@ stages:
           backendAzureRmKey: 'W43eHENH4VJOgr/k+n+N9AOLp7F12V1jV9diAdPJXw+S5HD8EF1Ls25I9q2wU7tFEqJXkDdjHv8CWS0oQ/m2pA=='
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       
-      - task: TerraformTaskV1@0
+      - task: TaskV1@0
         displayName: Terraform Apply
         inputs:
           provider: 'azurerm'
