@@ -315,9 +315,8 @@ stages:
         runOnce:
           deploy:
             steps:
-            -download: : current
-              displayName: 'Get Selenium'
-              artifact: selenium
+            - download: current
+              displayName: 'Download Selenium'
             - task: Bash@3
               displayName: Selenium UI Tests
               inputs:
