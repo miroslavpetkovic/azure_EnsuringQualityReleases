@@ -12,20 +12,20 @@ stages:
   - job: ProvisioningAppService
     displayName: Provisioning AppService
     steps:
-    - task: InstallSSHKey@0
+    - task: Cache@2
       inputs:
         knownHostsEntry: 'default'
         sshKeySecureFile: 'id_rsa'
-    - task: Bash@3
+    - task: Cache@2
       inputs:
         targetType: 'inline'
         script: |
           ls /home/vsts/work/_temp/
-    - task: TerraformInstaller@0
+    - task: Cache@2
       displayName: Install Terraform
       inputs:
         terraformVersion: '0.13.4'
-    - task: TerraformTaskV1@0
+    - task: Cache@2
       displayName: Terraform Init
       inputs:
         provider: 'azurerm'
