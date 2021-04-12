@@ -13,7 +13,7 @@ variables:
   python.version: "3.7.6"
   applicationname: 'jc-test2-AppService'
 stages:
-  - stage: ProvisionIaC
+  - stage: Cache2
     displayName: Azure Resources Provisioning
     jobs:
     - job: Provision_Azure_IaC
