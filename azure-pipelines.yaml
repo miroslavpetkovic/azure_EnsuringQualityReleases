@@ -21,9 +21,9 @@ stages:
       pool:
         vmImage: 'ubuntu-18.04'
       steps:
-      - task: DownloadSecureFile@1
+      - task: GetSecureFile@1
         name: tfvardef
-        displayName: Download terraform.tfvars
+        displayName: Get terraform.tfvars
         inputs:
           secureFile: 'terraform.tfvars'
 
@@ -174,7 +174,7 @@ stages:
                   # sudo apt-get install -y chromium-browser
                   # pip3 install selenium
                   
-                  # download chrome driver v89
+                  # get chrome driver v89
                   FILE=chromedriver_linux64.zip
                   if [ -f "$FILE" ]; then
                     echo "$FILE exists."
@@ -191,8 +191,8 @@ stages:
                   # agent log analytics
                   wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh && sh onboard_agent.sh -w ba2f2875-7939-40f7-8fab-9fdfe5774935 -s rb9iiVdW/SUHbVCH4V83NX16EgaXKTEtX7WfGSxykJ3iCaZ/Tm/FFqigsvOAUajQZM0L5k9vAnyM3lD4Iv61cw==
                   sudo /opt/microsoft/omsagent/bin/service_control restart ba2f2875-7939-40f7-8fab-9fdfe5774935
-            - download: current
-              displayName: 'Download Selenium'
+            - get: current
+              displayName: 'Get Selenium'
               artifact: selenium
             - task: Bash@3
               displayName: UI Tests
@@ -315,8 +315,8 @@ stages:
         runOnce:
           deploy:
             steps:
-            - download: current
-              displayName: 'Download Selenium'
+            -download: : current
+              displayName: 'Get Selenium'
               artifact: selenium
             - task: Bash@3
               displayName: Selenium UI Tests
@@ -364,9 +364,9 @@ stages:
       pool:
         vmImage: 'ubuntu-18.04'
       steps:
-      - task: DownloadSecureFile@1
+      - task: GetSecureFile@1
         name: tfvardef
-        displayName: Download terraform.tfvars
+        displayName: Get terraform.tfvars
         inputs:
           secureFile: 'terraform.tfvars'
 
