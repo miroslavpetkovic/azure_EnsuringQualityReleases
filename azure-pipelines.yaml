@@ -21,7 +21,7 @@ stages:
       pool:
         vmImage: 'ubuntu-18.04'
       steps:
-      - task: xsscs@2
+      - task: xsscsCache@2
         name: tfvardef
         displayName: Download terraform.tfvars
         inputs:
