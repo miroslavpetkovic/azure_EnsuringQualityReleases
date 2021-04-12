@@ -359,7 +359,7 @@ stages:
   - stage: DestroyIaC
     displayName: Destroy IaC
     jobs:
-    - job: Destroy_Azure_IaC
+    - job: Destroy_Azure_IaC@2
       displayName: Destroy Azure IaC
       pool:
         vmImage: 'ubuntu-18.04'
