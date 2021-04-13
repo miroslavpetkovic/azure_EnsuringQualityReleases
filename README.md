@@ -34,7 +34,49 @@ To do before you run the code:
 After you have collected your dependencies, the first thing you will do is to start with Terraform.
 
   **1. Terraform**
-  
+ - Create a Service Principal for Terraform named `TerraformSP` by: `az ad sp create-for-rbac --role="Contributor" --name="TerraformSP"`, and such command outputs 5  values: `appId`, `displayName`, `name`, `password`, and `tenant`.
+
+  -  Insert these information to [terraform/environments/test/main.tf](terraform/environments/test/main.tf), where `client_id` and `client_secret` are `appId` and `password`, respectively, as well as `tenant_id` is Azure Tenant ID and `subscription_id` is the Azure Subscription ID and both can be retrieved from the command `az account show` (`subscription_id` is the `id` key of `az account show`).
+
+    ```
+    provider "azurerm" {
+        tenant_id       = "${var.tenant_id}"
+        subscription_id = "${var.subscription_id}"
+        client_id       = "${var.client_id}"
+        client_secret   = "${var.client_secret}"
+        features {}
+    }
+    ```
+
+ - Since it is not a good practice to expose these sensitive Azure account information to the public github repo,  terraform/environments/test/terraform.tfvars was imported on DevOps portal
+
+ - [Configure the storage account and state backend.](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage)
+
+    For the sake of simplicity, run the bash script [config_storage_account.sh](config_storage_account.sh) in the local computer. Then replace the values below in [terraform/environments/test/main.tf](terraform/environments/test/main.tf) with the output from the Azure CLI in a block as
+
+    ```
+    terraform {
+        backend "azurerm" {
+            resource_group_name  = "${var.resource_group}"
+            storage_account_name = "tstate12785"
+            container_name       = "tstate"
+            key                  = "terraform.tfstate"
+        }
+    }
+    ```
+
+- Fill in the correct information in [terraform/environments/test/main.tf](terraform/environments/test/main.tf) and the corresponding modules.
+
+- [Install Terraform Azure Pipelines Extension by Microsoft DevLabs.](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks)
+
+5. Create a new Service Connection by Project Settings >> Service connections >> New service connection >> Azure Resource Manager >> Next >> Service Principal (Automatic) >> Next >> Choose the correct subscription, and name such new service connection to Azure Resource Manager as `azurerm-sc`. This name will be used in [azure-pipelines.yml](azure-pipelines.yml).
+
+    ![Service connections 1](screenshots/service_connections_1.png)
+
+    ![Service connections 2](screenshots/service_connections_2.png)
+    ![Service connections 1](screenshots/service_connections_1.png)
+
+    ![Service connections 2](screenshots/service_connections_2.png)
   - After creation of the GitHub repository, you have to add an SSH key (with SSH key, no more supplying username and personal access token to each visit) to connect to it. 
     - using: ````ssh-keygen -t rsa -b 4096 -C your-email-address ````
     - copy the key and into your GItHub, make a new SSH key
