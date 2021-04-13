@@ -50,20 +50,6 @@ stages:
               appName: 'web-app-proj-qr'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
-  - job: JMeter
-    pool: 
-      vmImage: 'Ubuntu-16.04'
-    steps:
-     - task: JMeter@2
-       displayName: 'Install JMeter 5.3'
-       inputs:
-         jmeterVersion: '5.3'
-     - task: Bash@3
-       displayName: 'Run JMeter test' 
-       inputs:
-        targetType: inline
-        script: |
-          jmeter -n -t JMeter/Starter.jmx -l JMeter/result.jtl
   - deployment: VMDeploy
     displayName: NAME
     environment: 
