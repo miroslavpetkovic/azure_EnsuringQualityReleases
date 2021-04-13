@@ -54,7 +54,7 @@ stages:
     pool: 
       vmImage: 'Ubuntu-16.04'
     steps:
-     - task: JMeterInstaller@0
+     - task: JMeterInstaller@2
        displayName: 'Install JMeter 5.3'
        inputs:
          jmeterVersion: '5.3'
