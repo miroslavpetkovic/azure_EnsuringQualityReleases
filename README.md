@@ -101,13 +101,14 @@ After you have collected your dependencies, the first thing you will do is to st
           - Terraform apply
           - In Terraform plan and apply, set the Environment Azure Subscription to your Subscription.
         - Click on __Save__, then on __Create release__, and it should show __Terraform Succeeded__ . Means that the resources I need it for the project is created, like the VM and the AppService.
-        
-        As shown above:
-        ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/release_pipeline_succeeded.png)
-        ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/deployment_succeeded.png)
-        ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/terra_apply.png)
-        
-The YAML-file of the pipeline is in my repo __my_azure_pipelines.yml__ ..
+
+![4.terraform_pipeline_1](./screenshots/4.terraform_pipeline_1.PNG)
+
+![4.terraform_pipeline_2](./screenshots/4.terraform_pipeline_2.PNG)
+
+![4.terraform_pipeline_3](./screenshots/4.terraform_pipeline_3.PNG)
+
+![4.terraform_pipeline_4](./screenshots/4.terraform_pipeline_4.PNG)
 
   **2. Execution of the tests duites**
     The tests suites will be executed to the Azure Devops, CI/CD pipeline.
