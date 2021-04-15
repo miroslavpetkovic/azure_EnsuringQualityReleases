@@ -114,6 +114,10 @@ After you have collected your dependencies, the first thing you will do is to st
 
 ![4.terraform_pipeline_4](./screenshots/4.terraform_pipeline_4.PNG)
 
+Results of running terraform pipeline:
+
+
+
   **2. Execution of the tests duites**
     The tests suites will be executed to the Azure Devops, CI/CD pipeline.
    - **1. Using Postman**
