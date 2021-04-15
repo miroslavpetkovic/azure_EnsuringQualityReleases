@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Regression Tests" tests="5" time="14.707">
+  <testsuite name="Activities / Get Activities" id="a80f3e7d-a622-4b72-a99b-6d104a0b75dd" timestamp="2021-04-15T09:56:44.153Z" tests="1" failures="0" errors="0" time="14.133">
+    <testcase name="Regression Test : Get All Activies - Status code is 200" time="14.133" classname="RegressionTests"/>
+  </testsuite>
+  <testsuite name="Activities / Get Activity" id="552579ad-e40c-4b4b-8d5f-952e4b075a46" timestamp="2021-04-15T09:56:44.153Z" tests="1" failures="0" errors="0" time="0.148">
+    <testcase name="Regression Test : Get Activity 1 - Status code is 200" time="0.148" classname="RegressionTests"/>
+  </testsuite>
+  <testsuite name="Activities / Create Activity" id="a6858d18-44f2-447f-91a8-8e267944f45b" timestamp="2021-04-15T09:56:44.153Z" tests="1" failures="0" errors="0" time="0.243">
+    <testcase name="Regression Test : Get Activity 1 - Status code is 200" time="0.243" classname="RegressionTests"/>
+  </testsuite>
+  <testsuite name="Activities / Update Activity" id="9916e890-9ba7-450b-9c53-eb071de0b038" timestamp="2021-04-15T09:56:44.153Z" tests="1" failures="0" errors="0" time="0.095">
+    <testcase name="Regression Test : Update Activity 1 - Status code is 200" time="0.095" classname="RegressionTests"/>
+  </testsuite>
+  <testsuite name="Activities / Delete Activity" id="ff440dbd-6270-49a7-bdc1-c04bc7d54dd8" timestamp="2021-04-15T09:56:44.153Z" tests="1" failures="0" errors="0" time="0.088">
+    <testcase name="Regression Test : Delete activity 0 - Status code is 200" time="0.088" classname="RegressionTests"/>
+  </testsuite>
+</testsuites>

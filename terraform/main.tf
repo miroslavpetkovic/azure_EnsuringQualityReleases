@@ -6,17 +6,11 @@ provider "azurerm" {
   features {}
 }
 terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "2.50.0"
-    }
-  }
   backend "azurerm" {
-    storage_account_name = "tstate3596"
+    storage_account_name = "tstate6448"
     container_name       = "tstate"
     key                  = "key1"
-    access_key           = "736eQ3mA+F7MuoMJ4D608e/1BF+84miIMYi7jLwX7HjrI9mPPXrPKBPSgGYtzUNl3q8dmNFTrSKNH3OdlrXdsQ=="
+    access_key           = "t0MA/TXxKOJE3JVRX/vSNJp45FoNmjhpXl7csDC9In7yHevUIcBl8KVPwUp4Y6oiRbCXzKJUC3iDD6c4kS5phA=="
   }
 }
 module "resource_group" {

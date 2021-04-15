@@ -23,7 +23,7 @@ resource "azurerm_linux_virtual_machine" "test" {
   network_interface_ids = [azurerm_network_interface.test.id]
   admin_ssh_key {
     username   = var.admin_username
-    public_key = file(var.public_key_path)
+    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChgRy/wwQYfOSK2gpqsLOik1GzGnDCy5oZ8Au2eGcK4LidTB3/OvKRhDKRqzJanQZCyeJPPbqxtC3kJhmCkYQt7WQzTXziEAZ2Gl1VZqYOLtLXGh2W4GAURmhUkog1LjCCN7c531e8v/3T4z7LzdIXzd8r+0WGcQ7mMIkPqQi1Fxhi9SDSvURvrm3uXMHeorGjJxpJzD3JuS5rbVasaGsgqEfnQat3qu3LN40JOVbfeQaIaSfLQZAIG1I+UZS9GD9HTLWd9MRxbzlEHhcL5rXeQ+emvkDsazZQd8h63qgmZQqtdP6AaBShQ2TBGaJe+fVXlC4zRgioZ6Mr7UA49ul5"
   }
   os_disk {
     caching              = "ReadWrite"

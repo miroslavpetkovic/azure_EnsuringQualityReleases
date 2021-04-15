@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Data Validation Tests" tests="4" time="0.575">
+  <testsuite name="Activities / Get Activities" id="057ab461-1a83-451b-ac41-29484bc5baa4" timestamp="2021-04-15T09:56:59.727Z" tests="1" failures="0" errors="0" time="0.337">
+    <testcase name="Data Validation Test : Get All Activies - Response inlcudes atleast one 'Title'" time="0.337" classname="DataValidationTests"/>
+  </testsuite>
+  <testsuite name="Activities / Get Activity" id="ab28a1ea-aabb-4df2-8169-9347d70f0d79" timestamp="2021-04-15T09:56:59.727Z" tests="1" failures="0" errors="0" time="0.080">
+    <testcase name="Data Validation Test : Get Activity 1 - Response inlcudes 'Title'" time="0.080" classname="DataValidationTests"/>
+  </testsuite>
+  <testsuite name="Activities / Create Activity" id="04344a7a-0198-4203-bbac-2221afff9579" timestamp="2021-04-15T09:56:59.727Z" tests="1" failures="0" errors="0" time="0.078">
+    <testcase name="Data Validation Test : Create new activity - Response inlcudes 'Visit the moon'" time="0.078" classname="DataValidationTests"/>
+  </testsuite>
+  <testsuite name="Activities / Update Activity" id="3083c39d-117d-40b1-9089-b3c54c7fe055" timestamp="2021-04-15T09:56:59.727Z" tests="1" failures="0" errors="0" time="0.080">
+    <testcase name="Data Validation Test : Update activity - Response inlcudes 'true'" time="0.080" classname="DataValidationTests"/>
+  </testsuite>
+</testsuites>
