@@ -104,6 +104,10 @@ After you have collected your dependencies, the first thing you will do is to st
 
 ![4.terraform_pipeline_1](./screenshots/4.terraform_pipeline_1.PNG)
 
+![4.terraform_pipeline_5](./screenshots/4.terraform_pipeline_5.PNG)
+
+![4.terraform_pipeline_6](./screenshots/4.terraform_pipeline_6.PNG)
+
 ![4.terraform_pipeline_2](./screenshots/4.terraform_pipeline_2.PNG)
 
 ![4.terraform_pipeline_3](./screenshots/4.terraform_pipeline_3.PNG)
