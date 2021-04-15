@@ -63,12 +63,8 @@ After you have collected your dependencies, the first thing you will do is to st
 
 5. Create a new Service Connection by Project Settings >> Service connections >> New service connection >> Azure Resource Manager >> Next >> Service Principal (Automatic) >> Next >> Choose the correct subscription, and name such new service connection to Azure Resource Manager as `azurerm-sc`. This name will be used in [azure-pipelines.yml](azure-pipelines.yml).
 
-    ![Service connections 1](screenshots/service_connections_1.png)
-
-    ![Service connections 2](screenshots/service_connections_2.png)
-    ![Service connections 1](screenshots/service_connections_1.png)
-
-    ![Service connections 2](screenshots/service_connections_2.png)
+![2.azure_resources](./screenshots/2.azure_resources.PNG)
+   
   - After creation of the GitHub repository, you have to add an SSH key (with SSH key, no more supplying username and personal access token to each visit) to connect to it. 
     - using: ````ssh-keygen -t rsa -b 4096 -C your-email-address ````
     - copy the key and into your GItHub, make a new SSH key
