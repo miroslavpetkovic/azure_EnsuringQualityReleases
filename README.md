@@ -69,6 +69,8 @@ After you have collected your dependencies, the first thing you will do is to st
   - Create another folder __project__ as a subfolder to environments to stimulate a type of environment.
   
      See the directory tree:
+     
+     
      ![3.terraform_tree_1](./screenshots/3.terraform_tree_1.PNG)
      
      ![3.terraform_tree_2](./screenshots/3.terraform_tree_2.PNG)
