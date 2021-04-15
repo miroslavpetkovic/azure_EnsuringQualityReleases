@@ -116,6 +116,18 @@ After you have collected your dependencies, the first thing you will do is to st
 
 Results of running terraform pipeline:
 
+![5.terraform_pipeline_results_1](./screenshots/5.terraform_pipeline_results_1.PNG)
+
+![5.terraform_pipeline_results_2](./screenshots/5.terraform_pipeline_results_2.PNG)
+
+![5.terraform_pipeline_results_3](./screenshots/5.terraform_pipeline_results_3.PNG)
+
+![5.terraform_pipeline_results_4](./screenshots/5.terraform_pipeline_results_4.PNG)
+
+![5.terraform_pipeline_results_5](./screenshots/5.terraform_pipeline_results_5.PNG)
+
+![5.terraform_pipeline_results_6](./screenshots/5.terraform_pipeline_results_6.PNG)
+
 
 
   **2. Execution of the tests duites**
