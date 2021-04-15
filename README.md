@@ -5,7 +5,7 @@ Udacity project to ensure the quality releases
 ## Introduction
 In this project, you will create an environment, delivery of a software, the automated testing of the software and the performance monitoring of the environment under different conditions.
 
-![pipeline-diagram](./screenshots/pipeline-diagram.PNG)
+![pipeline-diagram](./screenshots/pipeline-diagram.png)
 
 ## Getting Started
 Befor you even get ready to build the code:
