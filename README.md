@@ -177,12 +177,13 @@ Results of running terraform pipeline:
     * Create a Endurance Test Suite
     * Generate the HTML report (non-CI/CD) IMPORTANT: Since the AppService is using the Basic/Free plan, start small (2 users max) and once you are ready for the final submission, use up to 30 users for a max duration of 60 seconds. The "Data Out" quota for the AppService on this plan is only 165 MiB.
 
-    ![img-9](project-screenshots/jmeter-test-run-capture.png)
-
-    ![img-10](project-screenshots/jmeter-stress-test-result-capture.png)
-
-    ![img-11](project-screenshots/jmeter-endurance-test-result-capture.png)
-
+  ![9.JMeter1](./screenshots/9.JMeter1.PNG)
+  
+  ![9.JMeter2](./screenshots/9.JMeter2.PNG)
+  
+  ![9.JMeter3](./screenshots/9.JMeter3.PNG)
+  
+  
 4. For Azure Monitor:
 
     * Configure an Action Group (email)
