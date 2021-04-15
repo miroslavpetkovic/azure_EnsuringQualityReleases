@@ -61,28 +61,17 @@ After you have collected your dependencies, the first thing you will do is to st
 
 - [Install Terraform Azure Pipelines Extension by Microsoft DevLabs.](https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks)
 
-5. Create a new Service Connection by Project Settings >> Service connections >> New service connection >> Azure Resource Manager >> Next >> Service Principal (Automatic) >> Next >> Choose the correct subscription, and name such new service connection to Azure Resource Manager as `miroslavpetkovic`. This name will be used in azure-pipelines.yml and terraform pipeline.
+- Create a new Service Connection by Project Settings >> Service connections >> New service connection >> Azure Resource Manager >> Next >> Service Principal (Automatic) >> Next >> Choose the correct subscription, and name such new service connection to Azure Resource Manager as `miroslavpetkovic`. This name will be used in azure-pipelines.yml and terraform pipeline.
 
-![2.azure_resources](./screenshots/2.azure_resources.PNG)
-   
-  - After creation of the GitHub repository, you have to add an SSH key (with SSH key, no more supplying username and personal access token to each visit) to connect to it. 
-    - using: ````ssh-keygen -t rsa -b 4096 -C your-email-address ````
-    - copy the key and into your GItHub, make a new SSH key
-    - so ````git clone````
-  - Create a resource group: ````az group create --location your-location --name nameoftheresourcegroup````
-  - Run the shell-script: ````configure_storage_account.sh```` from your command line. Use the project group created before.
-  - To list the account access keys (````access_key````), run:
-  
-    ````az storage account keys list --resource-group nameoftheresourcegroup --account-name nameofthestorageaccount````
-  - Create a Service principal and the client secret for Terraform, run:
-  
-    ````az adsp create-for-rbac --role="Contributor" --scopes="/subscriptions/your-subscription-ID"````
+![1.2.azure_resources](./screenshots/2.azure_resources.PNG)
+
   - Create a __terraform__ folder and inside another folder named __environments__, to store the different configurations of modules according to the environments you use.
   - Create another folder __project__ as a subfolder to environments to stimulate a type of environment.
   
      See the directory tree:
+     ![3.terraform_tree_1](./screenshots/3.terraform_tree_1.PNG)
      
-    ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/terraform_tree.png)
+     ![3.terraform_tree_2](./screenshots/3.terraform_tree_2.PNG)
     
   - Deploying Terraform Infrastructure (Terraform resources) using Azure DevOps Pipelines:
     - Log in to your DevOps account and create a new project.
