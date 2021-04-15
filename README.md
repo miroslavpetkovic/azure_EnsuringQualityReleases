@@ -186,30 +186,31 @@ Results of running terraform pipeline:
   
 4. Deploy FakeRestAPI artifact to the terraform deployed Azure App Service. The deployed webapp URL is https://mpetkovic-appservice.azurewebsites.net/ where mpetkovic-AppService is the Azure App Service resource name in small letters.
 
-   ![10.FakeRestAPI1](./screenshots/10.FakeRestAPI1.PNG)
-   
-   ![10.FakeRestAPI2](./screenshots/10.FakeRestAPI2.PNG)
+  ![10.FakeRestAPI1](./screenshots/10.FakeRestAPI1.PNG)
+  
+  ![10.FakeRestAPI2](./screenshots/10.FakeRestAPI2.PNG)
    
 5. For Azure Monitor:
 
-    * Configure an Action Group (email)
-    * Configure an alert to trigger given a condition from the AppService
-    * The time the alert triggers and the time the Performance test is executed ought to be very close.
+ * It was configured an alert on an Azure AppService. You’ll send some requests to cause the AppService to error, and trigger your alert.
+ Instructions:
+ * Go to your appService in Micorsoft Azure, then look for **Monitoring** in the menu on the left hand side, then **Alerts**, click this.
+ * Then make a **new Alert Rule**, check the resource first, then add a **Condition** and choose **Http4xx**.
+ * Set the threshold value to **1**, means whenever you got two HTTP 404 errors, the alert will trigger, then click **done**
+ * Now create a new **ActionGroup** and call it for **email** (means, people who are interested in the alert). Then the **Action name** as HTTP 404 and the           **Action Type** to **Email/SMS/Push/Voice** . Then tape your email, clico on ok and ok again.
+ * so your alert rule name **Httpxxx grather than 2**, **severity** to 3 - Informational.
 
-    ![img-12](project-screenshots/azure-monitoring-data-out-metrics-capture.png)
 
-    ![img-13](project-screenshots/azure-alert-capture.png)
 
-    ![img-14](project-screenshots/azure-monitor-email-alert-capture.png)
+   ![11.Monitor1](./screenshots/11.Monitor1.PNG)
+   
+   ![11.Monitor2](./screenshots/11.Monitor2.PNG)
+   
+   ![11.Monitor3](./screenshots/11.Monitor3.PNG)
     
            
    - **4. Alert**  
-      * you will configure an alert on an Azure AppService. You’ll send some requests to cause the AppService to error, and trigger your alert.
-       * Go to your appService in Micorsoft Azure, then look for **Monitoring** in the menu on the left hand side, then **Alerts**, click this.
-       * Then make a **new Alert Rule**, check the resource first, then add a **Condition** and choose **HTTP 404**.
-       * Set the threshold value to **1**, means whenever you got two HTTP 404 errors, the alert will trigger, then click **done**
-       * Now create a new **Action Group** and call it for **email** (means, people who are interested in the alert). Then the **Action name** as HTTP 404 and the **Action Type** to **Email/SMS/Push/Voice** . Then tape your email, clico on ok and ok again.
-       * so your alert rule name **HTTP 404 grather than 1**, **severity** to 1.
+ 
        ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/alert_rule.png)
        * Back to your web browser, and create a few errors by givivng the URL of your AppService, and typing ````/feff````or some other random characters
        * And You should get an email (the alert will be triggered), like this:
