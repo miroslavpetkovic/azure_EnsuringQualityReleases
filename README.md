@@ -54,16 +54,8 @@ After you have collected your dependencies, the first thing you will do is to st
 
     For the sake of simplicity, run the bash script [config_storage_account.sh](config_storage_account.sh) in the local computer. Then replace the values below in [terraform/environments/test/main.tf](terraform/environments/test/main.tf) with the output from the Azure CLI in a block as
 
-    ```
-    terraform {
-        backend "azurerm" {
-            resource_group_name  = "${var.resource_group}"
-            storage_account_name = "tstate12785"
-            container_name       = "tstate"
-            key                  = "terraform.tfstate"
-        }
-    }
-    ```
+![1.storage_account](./screenshots/1.storage_account.PNG)
+    
 
 - Fill in the correct information in [terraform/environments/test/main.tf](terraform/environments/test/main.tf) and the corresponding modules.
 
