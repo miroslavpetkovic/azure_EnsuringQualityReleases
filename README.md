@@ -130,8 +130,71 @@ Results of running terraform pipeline:
 
 
 
-  **2. Execution of the tests duites**
+ ##  Execution of the tests duites**
     The tests suites will be executed to the Azure Devops, CI/CD pipeline.
+    
+ For the purouse of execution of Test Suites for:
+        * Postman - runs during build stage
+        * Selenium - runs on the linux VM in the deployment stage
+        * JMeter - runs against the AppService in the deployment stage
+  azure-pipelines.yaml was created.
+  
+  Results of implementation of testing pipelines are following:
+  
+  ![6.testing_pipeline_1](./screenshots/6.testing_pipeline_1.PNG)
+  
+  ![6.testing_pipeline_2](./screenshots/6.testing_pipeline_2.PNG)
+  
+  ![6.testing_pipeline_3](./screenshots/6.testing_pipeline_3.PNG)
+  
+  ![6.testing_pipeline_4](./screenshots/6.testing_pipeline_4.PNG)
+    
+  1. For Postman:
+
+    * Create a Regression Test Suite from the Starter APIs. Use the Publish Test Results task to publish the test results to Azure Pipelines.
+    * Create a Data Validation Test Suite from the Starter APIs.
+
+    ![img-5](project-screenshots/publish-postman-test-result-capture.png)
+
+    ![img-6](project-screenshots/newman-junit-test-report-capture.png)
+
+    ![img-7](project-screenshots/postman-regression-test-results-capture.png)
+
+2. For Selenium:
+
+    * Create a UI Test Suite that adds all products to a cart, and then removes them.
+    * Include print() commands throughout the tests so the actions of the tests can easily be determined. E.g. A login function might return which user is attempting to log in and whether or not the outcome was successful.
+    * Deploy the UI Test Suite to the linux VM and execute the Test Suite via the CI/CD pipeline.
+
+    ![img-8](project-screenshots/selenium-test-run-capture.png)
+
+3. For JMeter:
+
+    * Use the starter APIs to create two Test Suites. Using variables, reference a data set (csv file) in the test cases where the data will change.
+    * Create a Stress Test Suite
+    * Create a Endurance Test Suite
+    * Generate the HTML report (non-CI/CD) IMPORTANT: Since the AppService is using the Basic/Free plan, start small (2 users max) and once you are ready for the final submission, use up to 30 users for a max duration of 60 seconds. The "Data Out" quota for the AppService on this plan is only 165 MiB.
+
+    ![img-9](project-screenshots/jmeter-test-run-capture.png)
+
+    ![img-10](project-screenshots/jmeter-stress-test-result-capture.png)
+
+    ![img-11](project-screenshots/jmeter-endurance-test-result-capture.png)
+
+4. For Azure Monitor:
+
+    * Configure an Action Group (email)
+    * Configure an alert to trigger given a condition from the AppService
+    * The time the alert triggers and the time the Performance test is executed ought to be very close.
+
+    ![img-12](project-screenshots/azure-monitoring-data-out-metrics-capture.png)
+
+    ![img-13](project-screenshots/azure-alert-capture.png)
+
+    ![img-14](project-screenshots/azure-monitor-email-alert-capture.png)
+    
+    
+    
    - **1. Using Postman**
      * After installing Postman. You can use the __StarterAPIs.json__ under __postman__-folder in my repo as reference to make a collection and add a CRUD-requests. CRUD (create, read, update and delete), it's a operations done in a data repository (just database and records). 
      * Create a data validation and a regression test suite and publish the results to Azure Pipelines:
