@@ -196,97 +196,7 @@ Results of running terraform pipeline:
 
     ![img-14](project-screenshots/azure-monitor-email-alert-capture.png)
     
-    
-    
-   - **1. Using Postman**
-     * After installing Postman. You can use the __StarterAPIs.json__ under __postman__-folder in my repo as reference to make a collection and add a CRUD-requests. CRUD (create, read, update and delete), it's a operations done in a data repository (just database and records). 
-     * Create a data validation and a regression test suite and publish the results to Azure Pipelines:
-       * Export your collection and eventually the environment variables (if your collection uses it) from Postman. My collection (__StarterAPIs.postman_collection.json__ and __StarterAPIs2.postman_collection.json__) and my environment (__Walkthrough_StarterAPIs.postman_environment.json__) are under __postman__-folder.
-       
-         __StarterAPIs.postman_collection.json__ for ````Get All Employees````, ````Get Employee```` and ````Create Employee```` .
-         __StarterAPIs2.postman_collection.json__ for ````Put Employee```` and ````Delete Employee```` .
-        
-         I had to split the collection in two sub-collections because my Pipeline crashed when I run all together (has a poor network)
-    
-     * Now, back to your DevOps project to create a pipeline:
-       * You create your pipeline like I did previously when I create a pipeline for Terraform. Except that you have to __Add__ a two __command line__ tasks.
-         * First task to instal __Newman__ . Newman is a command-line collection runner for Postman, and its help you to test Postman collection directly form the command-line.
-         To install Newman, put in the script: ````sudo npm install -g newman````
-         * Second task to run the collection:
-         In the script: ````newman run StarterAPIs.postman_collection.json -e Walkthrough_StarterAPIs.postman_environment.json --reporters cli,junit --reporter-junit-export result.xml```` . In the command, you are using ````--reporters cli,junit```` means you are specifying the output both as junit and as comman-line interface.
-         * Add an __Artifact__ and a __Publish Test Results__ to publish the results.
-         * Run your pipeline and after a success, you will find the __result.xml__ under the Artifacts. See my __result.xml__ and __result2.xml__ under postman-folder. Under __Publish Test Results__ there is a link (__Published Test Run__) to see the result usinf JUnit.
-         * After testting: __StarterAPIs.postman_collection.json__ , I get these results:
-          ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/postman_startapis.png)
-          and:
-          ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/postman_startapis_chart.png)
-          and test results:
-          ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/postman_startapis_testResults.png)
-         *  testting: __StarterAPIs2.postman_collection.json__ :
-          ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/postman_startapis2.png)
-          and:
-          ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/postman_startapis2_chart.png)
-          and the test results:
-          ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/postman_startapis2_testResults.png)
-          
-          The YAML-files for the two sub-collection are in postman-folder.
-          
-   - **2. Test suite for JMeter**
-     * Now, you write a test collection that will run against the AppService you have deployed through terraform. In my case the AppService is __Web-app-proj-QR__
-       * Once the VM is deployed through terraform (like you did in the beginning), you need to deploy the fakerestapi to that VM. See the ````deployment: FakeRestAPI```` and task ````AzureWebApp@1```` in ````azure-pipelines.yaml````. The fakerestapi contains a web API, with REST endpoints for managing Activities (GET All Activities, Get Activity by ID, POST Activity, PUT Activity).
-       * After running the pipeline (see ````azure-pipelines.yaml````) you should get this:
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/deploying_fakerestapi.png)
-       
-       and your app-service should look like this:
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/fakeretapi_appservice.png)
-       
-       and you can browse all the REST endpoints available in the fakerestapi by visiting your App Service URL on the browser
-       
-       * Now it is time to add a post-deployment task to your Pipeline that utilizes JMeter to load test to the various API endpoints (eg. /api/Activities). But before that, you have to understand which type of tests. It will be:
-         * Stress test: many users (30 users) over short period of time (3 seconds) 
-         * Endurance test: constant load over a long period of time (60 seconds)
-       * Like you did it before, the pipeline to run JMeter contains in addition to the agent, add the __JMeter tool installer__ after you have instlled the JMeter extension. Name will be "Install JMeter 5.3", the version "5.3". After that add a __command-line__ to run the script:
-       ````jmeter -n -t Stress_test.jmx -l result_stress.csv -e -o StressResults```` . 
-       
-       The **Starter.jmx** file will be generated using the starterAPIs using variables in JMeter GUI.
-       Under JMeter-folder you can find the tests, the html-reports and the YAML-file for the stress test. It's the same for the endurannce test, just change the           ````Stress_test.jmx````in the script to the ````Endurance_test.jmx````.
-       
-       After running the pipeline, you should get this:
-       Running Stress test (same for endurance test):
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/jmeter_stress.png)
-       
-       JMeterstress result:
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/jmeter_stress_result.png)
-       
-       JMeter endurance result:
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/jmeter_endurance_result.png)
-       
-   - **3. Selenium**
-     * Create a functional UI test suite that adds all products to a cart and then removes them (https://www.saucedemo.com/). And youu have to include ````print()```` commands through the test so the actions of the testscan be determined. In additional to this, you must show the user name if the logging was successful.
-     See the file **login.py** under __selenium__-folder.
-     ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/logging_successful.png)
-     
-     * After that you need to configure the VM deployment:
-       * The VM can be added as resource within environment.
-       * [Follow the instructions to create an environment in Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/deploy-linux-vm?view=azure-devops&tabs=java)
-       * If the registration script shows ````sudo: ./svc.sh: command not found````:
-           ````sudo bin/installdependencies.sh````
-               ````cd ..````
-           ````sudo rm -rf azagent````
-       * Run the registration script again.
-       * After you have successfully completed all the steps, Update azure-pipelines.yaml with the Environment, and run the pipeline. You can now deploy to the Linux VM. See              ````deployment: VMDeploy```` in **azure-pipelines.yaml**.
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/vmdeploy_response.png)
-       
-       * After you are done with running all the below mentioned commands in your VM, you need to publish and consume files in pipeline to perform any action on the file.
-         See `````task: PublishBuildArtifacts@1```` under `````job: Build```` in **azure-pipelines.yaml**
-       * When you are done, connect to your VM ````ssh -i path/to/your/id_rsa admin_user@VM-public-ip-addr```` and run your test suite ````login.py````.
-         
-         You sholud get the log-file and the messages, like this:
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/selenium_test.png)
-       
-       * And The execution of the test suite by the CI/CD pipeline (the yaml-file of the pipeline is under selenium-folder/**selenium_pipeline.yml**):
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/selenium_test2.png)
-       
+           
    - **4. Alert**  
       * you will configure an alert on an Azure AppService. You’ll send some requests to cause the AppService to error, and trigger your alert.
        * Go to your appService in Micorsoft Azure, then look for **Monitoring** in the menu on the left hand side, then **Alerts**, click this.
@@ -321,8 +231,6 @@ Results of running terraform pipeline:
        
        * I searched almost the world to understand why I am not getting the records.
        
-## Output 
-See the images
 
 
 ## References:
