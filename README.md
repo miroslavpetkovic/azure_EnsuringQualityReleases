@@ -208,20 +208,8 @@ Results of running terraform pipeline:
    
    ![11.Monitor3](./screenshots/11.Monitor3.PNG)
     
-           
-   - **4. Alert**  
- 
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/alert_rule.png)
-       * Back to your web browser, and create a few errors by givivng the URL of your AppService, and typing ````/feff````or some other random characters
-       * And You should get an email (the alert will be triggered), like this:
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/received_email_triggered_alert.png)
-       
-       Metrics:
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/metric.png)
-       
-       Graphs of resource:
-       ![alt text](https://github.com/devops21a/project_Ensuring_QR/blob/main/screenshots/graphs_of_resource.png)
-       
+  
+      
      * **About Log Analytics**
        * I made a worksapce (finalprojectworkspace) following the steps [here](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources-custom-logs)
        * Then I installed the Linux agent using a wrapper script form [here](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/agent-linux#install-the-agent-using-wrapper-script)
