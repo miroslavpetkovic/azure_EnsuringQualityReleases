@@ -184,7 +184,13 @@ Results of running terraform pipeline:
   ![9.JMeter3](./screenshots/9.JMeter3.PNG)
   
   
-4. For Azure Monitor:
+4. Deploy FakeRestAPI artifact to the terraform deployed Azure App Service. The deployed webapp URL is https://mpetkovic-appservice.azurewebsites.net/ where mpetkovic-AppService is the Azure App Service resource name in small letters.
+
+   ![10.FakeRestAPI1](./screenshots/10.FakeRestAPI1.PNG)
+   
+   ![10.FakeRestAPI2](./screenshots/10.FakeRestAPI2.PNG)
+   
+5. For Azure Monitor:
 
     * Configure an Action Group (email)
     * Configure an alert to trigger given a condition from the AppService
