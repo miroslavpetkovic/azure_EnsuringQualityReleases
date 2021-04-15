@@ -213,7 +213,7 @@ Results of running terraform pipeline:
    ![11.Monitor4](./screenshots/11.Monitor4.PNG)
   
 7. Direct the output of the Selenium Test Suite to a log file, and execute the Test Suite. Configure custom logging in Azure Monitor to ingest this log file. This may be done non-CI/CD.       
-   ![11.Selenum test](./screenshots/11.Selenum test)
+   ![11.Selenum test](./screenshots/11.Selenum test.PNG)
 
 ## References:
  * https://azuredevopslabs.com/labs/vstsextend/terraform/ 
