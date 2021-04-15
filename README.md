@@ -151,22 +151,24 @@ Results of running terraform pipeline:
     
   1. For Postman:
 
-    * Create a Regression Test Suite from the Starter APIs. Use the Publish Test Results task to publish the test results to Azure Pipelines.
-    * Create a Data Validation Test Suite from the Starter APIs.
-
-    ![img-5](project-screenshots/publish-postman-test-result-capture.png)
-
-    ![img-6](project-screenshots/newman-junit-test-report-capture.png)
-
-    ![img-7](project-screenshots/postman-regression-test-results-capture.png)
-
+  Create a Regression Test Suite from the Starter APIs. Use the Publish Test Results task to publish the test results to Azure Pipelines.
+  Create a Data Validation Test Suite from the Starter APIs.
+  
+   ![7.postman1](./screenshots/7.postman1.PNG)
+   
+   ![7.postman2](./screenshots/7.postman2.PNG)
+   
+   ![7.postman3](./screenshots/7.postman3.PNG)
+   
+   ![7.postman4](./screenshots/7.postman4.PNG)
+ 
 2. For Selenium:
 
     * Create a UI Test Suite that adds all products to a cart, and then removes them.
     * Include print() commands throughout the tests so the actions of the tests can easily be determined. E.g. A login function might return which user is attempting to log in and whether or not the outcome was successful.
     * Deploy the UI Test Suite to the linux VM and execute the Test Suite via the CI/CD pipeline.
 
-    ![img-8](project-screenshots/selenium-test-run-capture.png)
+    ![8.Selenium](./screenshots/8.Selenium.PNG)
 
 3. For JMeter:
 
