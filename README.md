@@ -207,7 +207,8 @@ Results of running terraform pipeline:
    ![11.Monitor2](./screenshots/11.Monitor2.PNG)
    
    ![11.Monitor3](./screenshots/11.Monitor3.PNG)
-    
+   
+   ![11.Monitor4](./screenshots/11.Monitor4.PNG)
   
       
      * **About Log Analytics**
